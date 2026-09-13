@@ -97,6 +97,7 @@
     [X] TICKET 003 - added navigation and page nav buttons
     [X] TICKET 004 - creating Application shell & page classes
     [X] TICKET 005 - created page state.
+    [X] TICKET 006 - created the main config file
 
 ## Next Tickets
     not set
@@ -151,6 +152,7 @@
     001 : How to properly document and start a Java Desktop Software Project.
     002 : Creating a basic hello world JavaFX project.
     003 : Stage, Scene, Node and Layout.
+    004 : Dependency Injection.
 
 ## Future Ideas
     Ideas that are not yet part of the first version:

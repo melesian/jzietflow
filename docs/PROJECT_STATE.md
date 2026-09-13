@@ -95,6 +95,7 @@
     [X] TICKET 001 - establish the jZ Project
     [X] TICKET 002 - creating an empty application
     [X] TICKET 003 - added navigation and page nav buttons
+    [X] TICKET 004 - creating Application shell & page classes
 
 ## Next Tickets
     not set

@@ -100,6 +100,7 @@
     [X] TICKET 006 - created the main config file
     [X] TICKET 007 - created Project domain [Domain Layer]
     [X] TICKET 008 - created ProjectService [Application Layer]
+    [X] TICKET 009 - connected Domain Layer and Application Layer
 
 ## Next Tickets
     not set
@@ -156,6 +157,7 @@
     003 : Stage, Scene, Node and Layout.
     004 : Dependency Injection.
     005 : UUID
+    006 : Composition root.
 
 ## Future Ideas
     Ideas that are not yet part of the first version:

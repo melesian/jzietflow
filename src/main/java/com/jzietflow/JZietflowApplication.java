@@ -1,6 +1,7 @@
 package com.jzietflow;
 
 import com.jzietflow.application.config.ApplicationConfig;
+import com.jzietflow.application.project.ProjectService;
 import com.jzietflow.presentation.javafx.shell.ApplicationShell;
 
 import javafx.application.Application;
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
  *                          which my entire App rests upon
  */
 public class JZietflowApplication extends Application {
+    private final ProjectService projectService = new ProjectService();
     public static void main(String[] args){
         launch();
     }
@@ -34,6 +36,6 @@ public class JZietflowApplication extends Application {
         stage.setTitle(config.NAME);
 
 
-        ApplicationShell shell = new ApplicationShell(stage, config);
+        ApplicationShell shell = new ApplicationShell(stage, config, projectService);
     }
 }

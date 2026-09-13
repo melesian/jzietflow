@@ -1,6 +1,7 @@
 package com.jzietflow.presentation.javafx.shell;
 
 import com.jzietflow.application.config.ApplicationConfig;
+import com.jzietflow.application.project.ProjectService;
 import com.jzietflow.presentation.javafx.navigation.Page;
 import com.jzietflow.presentation.javafx.pages.ContentPage;
 import com.jzietflow.presentation.javafx.pages.CalendarPage;
@@ -26,12 +27,19 @@ public class ApplicationShell {
     private final SettingsPage settingsPage = new SettingsPage();
     private final CalendarPage calendarPage = new CalendarPage();
 
+    private  final ProjectService projectService;
+
     private BorderPane root = new BorderPane();
 
-    public ApplicationShell(Stage stage, ApplicationConfig config){
+    public ApplicationShell(
+        Stage stage, 
+        ApplicationConfig config,
+        ProjectService projectService)
+        {
         // set the current page
         currentPage = Page.HOME;
         this.config = config;
+        this.projectService = projectService;
 
         // creating layout -> using BorderPane
         // BorderPane root = new BorderPane();

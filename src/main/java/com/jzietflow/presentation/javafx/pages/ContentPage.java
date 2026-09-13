@@ -5,7 +5,7 @@ import javafx.scene.layout.VBox;
 
 // VBox can be extended...
 public class ContentPage extends VBox{
-    ContentPage(){
+    public ContentPage(){
         Label pageTitle = new Label("Content");
         Label message = new Label("Schedule Content");
 

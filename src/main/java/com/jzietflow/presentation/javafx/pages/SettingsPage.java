@@ -5,7 +5,7 @@ import javafx.scene.layout.VBox;
 
 // VBox can be extended...
 public class SettingsPage extends VBox{
-    SettingsPage(){
+    public SettingsPage(){
         Label pageTitle = new Label("Settings");
         Label message = new Label("Your Configs");
 

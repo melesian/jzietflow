@@ -1,5 +1,13 @@
 package com.jzietflow.presentation.javafx.shell;
 
+import com.jzietflow.presentation.javafx.navigation.Page;
+import com.jzietflow.presentation.javafx.pages.ContentPage;
+import com.jzietflow.presentation.javafx.pages.CalendarPage;
+import com.jzietflow.presentation.javafx.pages.HomePage;
+import com.jzietflow.presentation.javafx.pages.ProjectsPage;
+import com.jzietflow.presentation.javafx.pages.SettingsPage;
+
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,9 +16,22 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class ApplicationShell {
+    private Page currentPage;
+
+    private final HomePage homePage = new HomePage();
+    private final ProjectsPage projectsPage = new ProjectsPage();
+    private final ContentPage contentPage = new ContentPage();
+    private final SettingsPage settingsPage = new SettingsPage();
+    private final CalendarPage calendarPage = new CalendarPage();
+
+    private BorderPane root = new BorderPane();
+
     public ApplicationShell(Stage stage){
+        // set the current page
+        currentPage = Page.HOME;
+
         // creating layout -> using BorderPane
-        BorderPane root = new BorderPane();
+        // BorderPane root = new BorderPane();
 
         // creating nav bar -> using VBox (It stacks nodes vertically)
         VBox navigation = new VBox();
@@ -51,17 +72,51 @@ public class ApplicationShell {
 
         // adding a eventHandler on a button
         // passing a callback function (not really, just a lambda expression)
-        homeButton.setOnAction(event -> pageTitle.setText("Home Page"));
-        calendarButton.setOnAction(event -> pageTitle.setText("Calendar Management"));
-        projectsButton.setOnAction(event -> pageTitle.setText("Project Management"));
-        contentButton.setOnAction(event -> pageTitle.setText("Content Management"));
-        settingsButton.setOnAction(event -> pageTitle.setText("Settings"));
+        homeButton.setOnAction(event -> navigateTo(Page.HOME));
+        calendarButton.setOnAction(event -> navigateTo(Page.CALENDAR));
+        projectsButton.setOnAction(event -> navigateTo(Page.PROJECTS));
+        contentButton.setOnAction(event -> navigateTo(Page.CONTENT));
+        settingsButton.setOnAction(event -> navigateTo(Page.SETTINGS));
 
 
         // to show current window
         stage.show();
     }
-    private void showPage(){
+
+    public Page getCurrentPage(){
+        return currentPage;
+    }
+
+    private void showPage(Node page)
+    {
+        root.setCenter(page);
+    }
+
+    public void navigateTo(Page page)
+    {
+        if(page.equals(currentPage)) return; 
         
+        switch(page){
+            case HOME :
+                currentPage = page;
+                showPage(homePage);
+                break;
+            case CONTENT :
+                currentPage = page;
+                showPage(contentPage);
+                break;
+            case CALENDAR :
+                currentPage = page;
+                showPage(calendarPage);
+                break;
+            case PROJECTS :
+                currentPage = page;
+                showPage(projectsPage);
+                break;
+            case SETTINGS :
+                currentPage = page;
+                showPage(settingsPage);
+                break;
+        }
     }
 }

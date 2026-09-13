@@ -5,7 +5,7 @@ import javafx.scene.layout.VBox;
 
 // VBox can be extended...
 public class ProjectsPage extends VBox{
-    ProjectsPage(){
+    public ProjectsPage(){
         Label pageTitle = new Label("Projects");
         Label message = new Label("Your Work");
 

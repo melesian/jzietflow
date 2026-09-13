@@ -5,7 +5,7 @@ import javafx.scene.layout.VBox;
 
 // VBox can be extended...
 public class CalendarPage extends VBox{
-    CalendarPage(){
+    public CalendarPage(){
         Label pageTitle = new Label("Calendar");
         Label message = new Label("Your Monthly Plan");
 

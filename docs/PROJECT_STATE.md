@@ -98,6 +98,8 @@
     [X] TICKET 004 - creating Application shell & page classes
     [X] TICKET 005 - created page state.
     [X] TICKET 006 - created the main config file
+    [X] TICKET 007 - created Project domain [Domain Layer]
+    [X] TICKET 008 - created ProjectService [Application Layer]
 
 ## Next Tickets
     not set
@@ -153,6 +155,7 @@
     002 : Creating a basic hello world JavaFX project.
     003 : Stage, Scene, Node and Layout.
     004 : Dependency Injection.
+    005 : UUID
 
 ## Future Ideas
     Ideas that are not yet part of the first version:

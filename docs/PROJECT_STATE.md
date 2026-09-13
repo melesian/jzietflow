@@ -92,8 +92,8 @@
     none
 
 ## Current Ticket
-    TICKET 001 - establish the jZ Project
-    Status : In progress
+    [X] TICKET 001 - establish the jZ Project
+    [X] TICKET 002 - creating an empty application
 
 ## Next Tickets
     not set
@@ -146,6 +146,7 @@
 
 ## Lessons Learnt
     001 : How to properly document and start a Java Desktop Software Project.
+    002 : Creating a basic hello world JavaFX project.
 
 ## Future Ideas
     Ideas that are not yet part of the first version:

@@ -22,7 +22,7 @@ public class ApplicationShell {
     private ApplicationConfig config;
 
     private final HomePage homePage = new HomePage();
-    private final ProjectsPage projectsPage = new ProjectsPage();
+    private final ProjectsPage projectsPage;
     private final ContentPage contentPage = new ContentPage();
     private final SettingsPage settingsPage = new SettingsPage();
     private final CalendarPage calendarPage = new CalendarPage();
@@ -36,63 +36,65 @@ public class ApplicationShell {
         ApplicationConfig config,
         ProjectService projectService)
         {
-        // set the current page
-        currentPage = Page.HOME;
-        this.config = config;
-        this.projectService = projectService;
+            this.projectService = projectService;
 
-        // creating layout -> using BorderPane
-        // BorderPane root = new BorderPane();
+            projectsPage = new ProjectsPage(this.projectService);
+            // set the current page
+            currentPage = Page.HOME;
+            this.config = config;
 
-        // creating nav bar -> using VBox (It stacks nodes vertically)
-        VBox navigation = new VBox();
+            // creating layout -> using BorderPane
+            // BorderPane root = new BorderPane();
 
-        // creating buttons for all pages
-        Button homeButton       = new Button("Home");
-        Button calendarButton   = new Button("Calendar");
-        Button projectsButton   = new Button("Projects");
-        Button contentButton    = new Button("Content");
-        Button settingsButton   = new Button("Settings");
+            // creating nav bar -> using VBox (It stacks nodes vertically)
+            VBox navigation = new VBox();
 
-        // to add into a box -> using getChildren().add() method
-        navigation.getChildren().add(homeButton);
-        navigation.getChildren().add(calendarButton);
-        navigation.getChildren().add(projectsButton);
-        navigation.getChildren().add(contentButton);
-        navigation.getChildren().add(settingsButton);
+            // creating buttons for all pages
+            Button homeButton       = new Button("Home");
+            Button calendarButton   = new Button("Calendar");
+            Button projectsButton   = new Button("Projects");
+            Button contentButton    = new Button("Content");
+            Button settingsButton   = new Button("Settings");
 
-        // some spacing around the children
-        navigation.setSpacing(10);
+            // to add into a box -> using getChildren().add() method
+            navigation.getChildren().add(homeButton);
+            navigation.getChildren().add(calendarButton);
+            navigation.getChildren().add(projectsButton);
+            navigation.getChildren().add(contentButton);
+            navigation.getChildren().add(settingsButton);
 
-        // add to the left of the layout
-        root.setLeft(navigation);
+            // some spacing around the children
+            navigation.setSpacing(10);
 
-        // creating a label
-        Label pageTitle = new Label("Home");
+            // add to the left of the layout
+            root.setLeft(navigation);
 
-        // add to the center of the layout
-        root.setCenter(pageTitle);
+            // creating a label
+            Label pageTitle = new Label("Home");
 
-        // create a scene and add a label into it
-        Scene scene = new Scene(root);
+            // add to the center of the layout
+            root.setCenter(pageTitle);
 
-        // add a scene into a stage
-        stage.setScene(scene);
+            // create a scene and add a label into it
+            Scene scene = new Scene(root);
 
-
-
-        // adding a eventHandler on a button
-        // passing a callback function (not really, just a lambda expression)
-        homeButton.setOnAction(event -> navigateTo(Page.HOME));
-        calendarButton.setOnAction(event -> navigateTo(Page.CALENDAR));
-        projectsButton.setOnAction(event -> navigateTo(Page.PROJECTS));
-        contentButton.setOnAction(event -> navigateTo(Page.CONTENT));
-        settingsButton.setOnAction(event -> navigateTo(Page.SETTINGS));
+            // add a scene into a stage
+            stage.setScene(scene);
 
 
-        // to show current window
-        stage.show();
-    }
+
+            // adding a eventHandler on a button
+            // passing a callback function (not really, just a lambda expression)
+            homeButton.setOnAction(event -> navigateTo(Page.HOME));
+            calendarButton.setOnAction(event -> navigateTo(Page.CALENDAR));
+            projectsButton.setOnAction(event -> navigateTo(Page.PROJECTS));
+            contentButton.setOnAction(event -> navigateTo(Page.CONTENT));
+            settingsButton.setOnAction(event -> navigateTo(Page.SETTINGS));
+
+
+            // to show current window
+            stage.show();
+        }
 
     public Page getCurrentPage(){
         return currentPage;

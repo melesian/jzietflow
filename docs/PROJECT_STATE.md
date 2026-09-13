@@ -94,6 +94,7 @@
 ## Current Ticket
     [X] TICKET 001 - establish the jZ Project
     [X] TICKET 002 - creating an empty application
+    [X] TICKET 003 - added navigation and page nav buttons
 
 ## Next Tickets
     not set
@@ -147,6 +148,7 @@
 ## Lessons Learnt
     001 : How to properly document and start a Java Desktop Software Project.
     002 : Creating a basic hello world JavaFX project.
+    003 : Stage, Scene, Node and Layout.
 
 ## Future Ideas
     Ideas that are not yet part of the first version:

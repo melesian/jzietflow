@@ -96,6 +96,7 @@
     [X] TICKET 002 - creating an empty application
     [X] TICKET 003 - added navigation and page nav buttons
     [X] TICKET 004 - creating Application shell & page classes
+    [X] TICKET 005 - created page state.
 
 ## Next Tickets
     not set

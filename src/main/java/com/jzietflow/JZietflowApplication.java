@@ -1,5 +1,6 @@
 package com.jzietflow;
 
+import com.jzietflow.application.config.ApplicationConfig;
 import com.jzietflow.presentation.javafx.shell.ApplicationShell;
 
 import javafx.application.Application;
@@ -20,18 +21,19 @@ public class JZietflowApplication extends Application {
 
     @Override // needs to override the Application.start() method
     public void start(Stage stage){
+        ApplicationConfig config = new ApplicationConfig();
+
         // DIMENSION STAGE
-        stage.setWidth(1366);
-        stage.setHeight(760);
+        stage.setWidth(config.WINDOW_WIDTH);
+        stage.setHeight(config.WINDOW_HEIGHT);
         
         // STAGE -> more like a house
         // SCENE -> more like a room of a house where components live
 
         // to set title of current window
-        stage.setTitle("jZietflow");
+        stage.setTitle(config.NAME);
 
 
-        ApplicationShell applicationShell = new ApplicationShell(stage);
-        
+        ApplicationShell shell = new ApplicationShell(stage, config);
     }
 }

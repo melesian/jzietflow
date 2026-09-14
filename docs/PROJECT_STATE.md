@@ -103,6 +103,7 @@
     [X] TICKET 009 - connected Domain Layer and Application Layer
     [X] TICKET 010 - created a Create Project Form
     [X] TICKET 011 - created a ProjectRepository and connected it to ProjectService
+    [X] TICKET 012 - created a SQLite implementation
 
 ## Next Tickets
     not set
@@ -162,6 +163,7 @@
     006 : Composition root.
     007 : JavaFX forms
     008 : Repository, created a ProjectRepository
+    009 : Integrating SQLlite database
 
 ## Future Ideas
     Ideas that are not yet part of the first version:

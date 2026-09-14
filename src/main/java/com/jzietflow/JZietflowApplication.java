@@ -3,7 +3,8 @@ package com.jzietflow;
 import com.jzietflow.application.config.ApplicationConfig;
 import com.jzietflow.application.project.ProjectRepository;
 import com.jzietflow.application.project.ProjectService;
-import com.jzietflow.infrastructure.persistence.memory.InMemoryProjectRepository;
+// import com.jzietflow.infrastructure.persistence.memory.InMemoryProjectRepository;
+import com.jzietflow.infrastructure.persistence.sqlite.SQLiteProjectRepository;
 import com.jzietflow.presentation.javafx.shell.ApplicationShell;
 
 import javafx.application.Application;
@@ -13,7 +14,8 @@ import javafx.stage.Stage;
  *                          which my entire App rests upon
  */
 public class JZietflowApplication extends Application {
-    public final ProjectRepository repository = new InMemoryProjectRepository();
+    // public final ProjectRepository repository = new InMemoryProjectRepository();
+    public final ProjectRepository repository = new SQLiteProjectRepository();
     private final ProjectService projectService = new ProjectService(repository);
     public static void main(String[] args){
         launch();

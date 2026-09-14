@@ -7,7 +7,14 @@ public class Project {
     private final UUID id;
 
     public Project(String name){
+        // MAINLY FOR CREATING A NEW PROJECT
         this.id = UUID.randomUUID();
+        this.name = name;
+    }
+
+    public Project(UUID id, String name){
+        // MAINLY FOR CONSTRUCTING A PROJECT FROM DB
+        this.id = id;
         this.name = name;
     }
 

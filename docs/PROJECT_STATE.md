@@ -104,6 +104,7 @@
     [X] TICKET 010 - created a Create Project Form
     [X] TICKET 011 - created a ProjectRepository and connected it to ProjectService
     [X] TICKET 012 - created a SQLite implementation
+    [X] TICKET 013 - show projects and refresh as a new project is added
 
 ## Next Tickets
     not set

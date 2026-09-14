@@ -1,5 +1,7 @@
 package com.jzietflow.presentation.javafx.pages;
 
+import java.util.List;
+
 import com.jzietflow.application.project.ProjectService;
 import com.jzietflow.domain.Project;
 
@@ -11,6 +13,8 @@ import javafx.scene.layout.VBox;
 // VBox can be extended...
 public class ProjectsPage extends VBox{
     private final ProjectService projectService;
+    private final VBox projectList = new VBox(10);
+
 
     public ProjectsPage(ProjectService projectService){
         this.projectService = projectService;
@@ -40,8 +44,27 @@ public class ProjectsPage extends VBox{
             if(project != null){
                 message.setText("Project created: " + project.getId());
             }
+
+            loadProjects();
         });
 
         this.getChildren().add(projectForm);
+
+        loadProjects();
+        this.getChildren().add(projectList);
+    }
+
+    private void loadProjects()
+    {
+        List<Project> projects = projectService.getProjects();
+
+        projectList.getChildren().clear();
+
+        for(Project project : projects)
+        {
+            Label projectLabel = new Label(project.getName());
+
+            projectList.getChildren().add(projectLabel);
+        }
     }
 }

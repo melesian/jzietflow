@@ -1,5 +1,7 @@
 package com.jzietflow.application.project;
 
+import java.util.List;
+
 import com.jzietflow.domain.Project;
 
 public class ProjectService {
@@ -15,5 +17,10 @@ public class ProjectService {
         Project project = new Project(projectName);
 
         return projectRepository.save(project);
+    }
+    
+    public List<Project> getProjects()
+    {
+        return projectRepository.findAll();
     }
 }

@@ -55,7 +55,7 @@ public class SQLiteProjectRepository implements ProjectRepository {
         )
         {
             statement.setString(1, project.getId().toString());
-            statement.setString(1, project.getName());
+            statement.setString(2, project.getName());
 
             statement.executeUpdate();
 

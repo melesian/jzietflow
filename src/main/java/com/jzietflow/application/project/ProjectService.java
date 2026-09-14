@@ -3,10 +3,17 @@ package com.jzietflow.application.project;
 import com.jzietflow.domain.Project;
 
 public class ProjectService {
-    public Project createProject(String projectName){
-        
+    private final ProjectRepository projectRepository;
+
+    public ProjectService(ProjectRepository projectRepository)
+    {
+        this.projectRepository = projectRepository;
+    }
+
+    public Project createProject(String projectName)
+    {
         Project project = new Project(projectName);
 
-        return project;
+        return projectRepository.save(project);
     }
 }

@@ -1,6 +1,7 @@
 package com.jzietflow.application.project;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.jzietflow.domain.Project;
 
@@ -22,5 +23,9 @@ public class ProjectService {
     public List<Project> getProjects()
     {
         return projectRepository.findAll();
+    }
+
+    public void deleteProject(UUID id){
+        projectRepository.delete(id);
     }
 }

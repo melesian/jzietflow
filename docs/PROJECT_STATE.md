@@ -105,6 +105,7 @@
     [X] TICKET 011 - created a ProjectRepository and connected it to ProjectService
     [X] TICKET 012 - created a SQLite implementation
     [X] TICKET 013 - show projects and refresh as a new project is added
+    [X] TICKET 014 - created a Project delete feature
 
 ## Next Tickets
     not set

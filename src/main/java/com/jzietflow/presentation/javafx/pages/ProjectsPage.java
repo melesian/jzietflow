@@ -7,14 +7,17 @@ import com.jzietflow.domain.Project;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+
 
 // VBox can be extended...
 public class ProjectsPage extends VBox{
     private final ProjectService projectService;
     private final VBox projectList = new VBox(10);
-
 
     public ProjectsPage(ProjectService projectService){
         this.projectService = projectService;
@@ -62,9 +65,20 @@ public class ProjectsPage extends VBox{
 
         for(Project project : projects)
         {
+            HBox projectRow = new HBox(5);
             Label projectLabel = new Label(project.getName());
 
-            projectList.getChildren().add(projectLabel);
+            Button deleteButton = new Button("Delete");
+
+            deleteButton.setOnAction((event) -> {
+                projectService.deleteProject(project.getId());
+                loadProjects();
+            });
+
+            projectRow.getChildren().add(projectLabel);
+            projectRow.getChildren().add(deleteButton);
+
+            projectList.getChildren().add(projectRow);
         }
     }
 }

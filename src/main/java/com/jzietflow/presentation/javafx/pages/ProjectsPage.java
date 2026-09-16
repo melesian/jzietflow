@@ -4,8 +4,10 @@ import java.util.List;
 
 import com.jzietflow.application.project.ProjectService;
 import com.jzietflow.domain.Project;
+import com.jzietflow.domain.ProjectStatus;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -71,6 +73,7 @@ public class ProjectsPage extends VBox{
             HBox projectRow = new HBox(5);
             Label projectLabel = new Label(project.getName());
             Label projectDescription = new Label(project.getDescription());
+            Label projectStatus = new Label(project.getStatus().name());
 
             Button editButton = new Button("Edit");
             Button deleteButton = new Button("Delete");
@@ -78,6 +81,11 @@ public class ProjectsPage extends VBox{
             editButton.setOnAction((event) -> {
                 TextField editName = new TextField(project.getName());
                 TextArea editDescription = new TextArea(project.getDescription());
+                ComboBox<ProjectStatus> statusBox = new ComboBox<>();
+
+
+                statusBox.getItems().addAll(ProjectStatus.values());
+                statusBox.setValue(project.getStatus());
 
                 Button saveButton = new Button("Save");
                 Button cancelButton = new Button("Cancel");
@@ -86,16 +94,18 @@ public class ProjectsPage extends VBox{
 
                 projectRow.getChildren().add(editName);
                 projectRow.getChildren().add(editDescription);
+                projectRow.getChildren().add(statusBox);
                 projectRow.getChildren().add(saveButton);
                 projectRow.getChildren().add(cancelButton);
 
                 saveButton.setOnAction((saveEvent) -> {
                     String newName = editName.getText();
                     String newDescription = editDescription.getText();
+                    ProjectStatus newStatus = statusBox.getValue();
 
                     if(newName.isBlank() || newDescription.isBlank()) return;
 
-                    projectService.updateProject(project.getId(), newName, newDescription);
+                    projectService.updateProject(project.getId(), newName, newDescription, newStatus);
 
                     loadProjects();
                 });
@@ -112,6 +122,7 @@ public class ProjectsPage extends VBox{
 
             projectRow.getChildren().add(projectLabel);
             projectRow.getChildren().add(projectDescription);
+            projectRow.getChildren().add(projectStatus);
             projectRow.getChildren().add(editButton);
             projectRow.getChildren().add(deleteButton);
 

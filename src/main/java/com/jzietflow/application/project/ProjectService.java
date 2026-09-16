@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.jzietflow.domain.Project;
+import com.jzietflow.domain.ProjectStatus;
 
 public class ProjectService {
     private final ProjectRepository projectRepository;
@@ -14,11 +15,28 @@ public class ProjectService {
         this.projectRepository = projectRepository;
     }
 
-    public Project createProject(String projectName, String projectDescription)
+    public Project createProject(String name, String description)
     {
-        Project project = new Project(projectName, projectDescription);
+        return createProject(name, description, ProjectStatus.PLANNED);
+    }
+
+    public Project createProject(String projectName, String projectDescription, ProjectStatus projectStatus)
+    {
+        Project project = new Project(projectName, projectDescription, projectStatus);
 
         return projectRepository.save(project);
+    }
+
+    public void changeProjectStatus(UUID id, ProjectStatus status){
+        Optional<Project> project = projectRepository.findById(id);
+
+        if(project.isEmpty()) throw new IllegalArgumentException("Project not found: " + id.toString());
+
+        Project existingProject = project.get();
+
+        existingProject.changeStatus(status);
+
+        projectRepository.update(existingProject);
     }
     
     public List<Project> getProjects()
@@ -30,7 +48,7 @@ public class ProjectService {
         projectRepository.delete(id);
     }
 
-    public void updateProject(UUID id, String name, String description)
+    public void updateProject(UUID id, String name, String description, ProjectStatus status)
     {
         Optional<Project> project = projectRepository.findById(id);
 
@@ -43,6 +61,7 @@ public class ProjectService {
 
         existingProject.rename(name);
         existingProject.updateDescription(description);
+        existingProject.changeStatus(status);
 
         projectRepository.update(existingProject);
     }

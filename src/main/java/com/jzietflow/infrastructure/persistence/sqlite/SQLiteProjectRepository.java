@@ -13,6 +13,7 @@ import java.sql.SQLException;
 
 import com.jzietflow.application.project.ProjectRepository;
 import com.jzietflow.domain.Project;
+import com.jzietflow.domain.ProjectStatus;
 
 public class SQLiteProjectRepository implements ProjectRepository {
     private static String DATABASE_URL = "jdbc:sqlite:jZietflow.db";
@@ -28,7 +29,8 @@ public class SQLiteProjectRepository implements ProjectRepository {
                 CREATE TABLE IF NOT EXISTS projects(
                     id TEXT PRIMARY KEY,
                     name TEXT NOT NULL,
-                    description TEXT NOT NULL
+                    description TEXT NOT NULL,
+                    status TEXT NOT NULL
                 )
                 """;
 
@@ -46,8 +48,8 @@ public class SQLiteProjectRepository implements ProjectRepository {
     @Override 
     public Project save(Project project){
         String sql = """
-                INSERT INTO projects (id, name, description)
-                VALUES (?, ?, ?)
+                INSERT INTO projects (id, name, description, status)
+                VALUES (?, ?, ?, ?)
             """;
         
         try(
@@ -58,6 +60,7 @@ public class SQLiteProjectRepository implements ProjectRepository {
             statement.setString(1, project.getId().toString());
             statement.setString(2, project.getName());
             statement.setString(3, project.getDescription());
+            statement.setString(4, project.getStatus().name());
 
             statement.executeUpdate();
 
@@ -94,7 +97,7 @@ public class SQLiteProjectRepository implements ProjectRepository {
     @Override 
     public List<Project> findAll(){
         String sql = """
-                SELECT id, name, description
+                SELECT id, name, description, status
                 FROM projects
 
                 """;
@@ -114,8 +117,9 @@ public class SQLiteProjectRepository implements ProjectRepository {
                 UUID projectId = UUID.fromString(resultSet.getString("id"));
                 String projectName = resultSet.getString("name");
                 String projectDescription = resultSet.getString("description");
+                ProjectStatus projectStatus = ProjectStatus.valueOf(resultSet.getString("status"));
 
-                projects.add(new Project(projectId, projectName, projectDescription));
+                projects.add(new Project(projectId, projectName, projectDescription, projectStatus));
             }
 
             return projects;
@@ -129,7 +133,7 @@ public class SQLiteProjectRepository implements ProjectRepository {
     @Override 
     public Optional<Project> findById(UUID id){
         String sql = """
-                SELECT id, name, description
+                SELECT id, name, description, status
                 FROM projects
                 WHERE id = ?
                 """;
@@ -148,8 +152,9 @@ public class SQLiteProjectRepository implements ProjectRepository {
                     UUID projectId = UUID.fromString(resultSet.getString("id"));
                     String projectName = resultSet.getString("name");
                     String projectDescription = resultSet.getString("description");
+                    ProjectStatus projectStatus = ProjectStatus.valueOf(resultSet.getString("status"));
 
-                    return Optional.of(new Project(projectId, projectName, projectDescription));
+                    return Optional.of(new Project(projectId, projectName, projectDescription, projectStatus));
                 }
 
                 return Optional.empty();
@@ -165,7 +170,7 @@ public class SQLiteProjectRepository implements ProjectRepository {
     public void update(Project project){
         String sql = """
                 UPDATE projects
-                SET name = ? , description = ?
+                SET name = ? , description = ?, status = ?
                 WHERE id = ?
                 """;
 
@@ -176,7 +181,8 @@ public class SQLiteProjectRepository implements ProjectRepository {
         {
             statement.setString(1, project.getName());
             statement.setString(2, project.getDescription());
-            statement.setString(3, project.getId().toString());
+            statement.setString(3, project.getStatus().name());
+            statement.setString(4, project.getId().toString());
 
 
             statement.executeUpdate();

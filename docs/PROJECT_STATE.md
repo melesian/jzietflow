@@ -108,7 +108,7 @@
     [X] TICKET 014 - created a Project delete feature
     [X] TICKET 015 - created a Project edit feature
     [X] TICKET 016 - created a Project complete field - description
-
+    [X] TICKET 017 - created a Project complete field - status
 
 ## Next Tickets
     not set
@@ -169,6 +169,7 @@
     007 : JavaFX forms
     008 : Repository, created a ProjectRepository
     009 : Integrating SQLlite database
+    010 : Enum methods
 
 ## Future Ideas
     Ideas that are not yet part of the first version:

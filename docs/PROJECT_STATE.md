@@ -109,6 +109,7 @@
     [X] TICKET 015 - created a Project edit feature
     [X] TICKET 016 - created a Project complete field - description
     [X] TICKET 017 - created a Project complete field - status
+    [ ] TICKET 018 - 
 
 ## Next Tickets
     not set

@@ -77,6 +77,7 @@ public class ApplicationShell {
 
             // create a scene and add a label into it
             Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/styles/jzietflow.css").toExternalForm());
 
             // add a scene into a stage
             stage.setScene(scene);

@@ -1,0 +1,53 @@
+.calendar-page{
+    -fx-background-color : rgb(19, 20, 19);
+    -fx-padding : 20px;
+
+    /* -fx-alignment : center; */
+}
+
+.calendar-grid{
+    -fx-max-width : 49px;
+    -fx-background-color : rgb(13, 14, 13);
+}
+
+.calendar-cell{
+    -fx-border-width : 1px;
+    -fx-border-color : white;
+    -fx-min-width : 100%;
+    -fx-min-height : 100px;
+}
+
+.calendar-day{
+    -fx-min-width : 100px;
+    -fx-font-size : 32px;
+    -fx-font-weight : bold;
+    -fx-opacity : 0.6;
+
+    -fx-alignment : center;
+}
+
+.calendar-title{
+    -fx-text-fill : white;
+    -fx-font-size : 24px;
+    -fx-font-weight : bold;
+}
+
+.calendar-controls{
+    -fx-alignment : center;
+}
+
+.calendar-month-label{
+    -fx-font-size : 18px;
+    -fx-font-weight : bold;
+}
+
+.calendar-day-header{
+    -fx-font-size : 13px;
+    -fx-font-weight : bold;
+    -fx-text-fill: yellow;
+}
+
+.calendar-day-today{
+    -fx-border-color : grey;
+    -fx-border-width : 2px;
+}

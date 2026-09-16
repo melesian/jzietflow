@@ -26,7 +26,7 @@ public class Project {
         return this.id;
     }
 
-    public void setName(String newName){
+    public void rename(String newName){
         this.name = newName;
     }
 

@@ -156,4 +156,28 @@ public class SQLiteProjectRepository implements ProjectRepository {
             throw new RuntimeException("Couldnt find");
         }
     }
+
+    @Override 
+    public void update(Project project){
+        String sql = """
+                UPDATE projects
+                SET name = ? 
+                WHERE id = ?
+                """;
+
+        try(
+            Connection connection = DriverManager.getConnection(DATABASE_URL);
+            PreparedStatement statement = connection.prepareStatement(sql)
+        )
+        {
+            statement.setString(1, project.getName());
+            statement.setString(2, project.getId().toString());
+
+            statement.executeUpdate();
+        }
+        catch(SQLException e)
+        {
+            throw new RuntimeException("Failed to update project: " + project.getId().toString());
+        }
+    }
 }

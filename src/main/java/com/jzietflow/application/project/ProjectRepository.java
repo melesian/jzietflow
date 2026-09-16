@@ -14,4 +14,6 @@ public interface ProjectRepository {
     List<Project> findAll();
     
     void delete(UUID id);
+
+    void update(Project project);
 }

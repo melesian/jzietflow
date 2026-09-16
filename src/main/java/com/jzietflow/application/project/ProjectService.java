@@ -1,6 +1,7 @@
 package com.jzietflow.application.project;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.jzietflow.domain.Project;
@@ -27,5 +28,19 @@ public class ProjectService {
 
     public void deleteProject(UUID id){
         projectRepository.delete(id);
+    }
+
+    public void renameProject(UUID id, String name)
+    {
+        Optional<Project> project = projectRepository.findById(id);
+
+        if(project.isEmpty())
+        {
+            throw new IllegalArgumentException("Project not found: " + id.toString());
+        }
+
+        project.get().rename(name);
+
+        projectRepository.update(project.get());
     }
 }

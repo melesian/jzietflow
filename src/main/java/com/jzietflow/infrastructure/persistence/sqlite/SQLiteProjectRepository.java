@@ -27,7 +27,8 @@ public class SQLiteProjectRepository implements ProjectRepository {
         String sql = """
                 CREATE TABLE IF NOT EXISTS projects(
                     id TEXT PRIMARY KEY,
-                    name TEXT NOT NULL
+                    name TEXT NOT NULL,
+                    description TEXT NOT NULL
                 )
                 """;
 
@@ -45,8 +46,8 @@ public class SQLiteProjectRepository implements ProjectRepository {
     @Override 
     public Project save(Project project){
         String sql = """
-                INSERT INTO projects (id, name)
-                VALUES (?, ?)
+                INSERT INTO projects (id, name, description)
+                VALUES (?, ?, ?)
             """;
         
         try(
@@ -56,6 +57,7 @@ public class SQLiteProjectRepository implements ProjectRepository {
         {
             statement.setString(1, project.getId().toString());
             statement.setString(2, project.getName());
+            statement.setString(3, project.getDescription());
 
             statement.executeUpdate();
 
@@ -92,7 +94,7 @@ public class SQLiteProjectRepository implements ProjectRepository {
     @Override 
     public List<Project> findAll(){
         String sql = """
-                SELECT id, name
+                SELECT id, name, description
                 FROM projects
 
                 """;
@@ -111,8 +113,9 @@ public class SQLiteProjectRepository implements ProjectRepository {
             {
                 UUID projectId = UUID.fromString(resultSet.getString("id"));
                 String projectName = resultSet.getString("name");
+                String projectDescription = resultSet.getString("description");
 
-                projects.add(new Project(projectId, projectName));
+                projects.add(new Project(projectId, projectName, projectDescription));
             }
 
             return projects;
@@ -126,7 +129,7 @@ public class SQLiteProjectRepository implements ProjectRepository {
     @Override 
     public Optional<Project> findById(UUID id){
         String sql = """
-                SELECT id, name
+                SELECT id, name, description
                 FROM projects
                 WHERE id = ?
                 """;
@@ -144,8 +147,9 @@ public class SQLiteProjectRepository implements ProjectRepository {
                 {
                     UUID projectId = UUID.fromString(resultSet.getString("id"));
                     String projectName = resultSet.getString("name");
+                    String projectDescription = resultSet.getString("description");
 
-                    return Optional.of(new Project(projectId, projectName));
+                    return Optional.of(new Project(projectId, projectName, projectDescription));
                 }
 
                 return Optional.empty();
@@ -161,7 +165,7 @@ public class SQLiteProjectRepository implements ProjectRepository {
     public void update(Project project){
         String sql = """
                 UPDATE projects
-                SET name = ? 
+                SET name = ? , description = ?
                 WHERE id = ?
                 """;
 
@@ -171,7 +175,9 @@ public class SQLiteProjectRepository implements ProjectRepository {
         )
         {
             statement.setString(1, project.getName());
-            statement.setString(2, project.getId().toString());
+            statement.setString(2, project.getDescription());
+            statement.setString(3, project.getId().toString());
+
 
             statement.executeUpdate();
         }

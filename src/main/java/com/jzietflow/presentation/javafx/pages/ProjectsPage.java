@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.TextArea;
 
 
 // VBox can be extended...
@@ -31,16 +32,20 @@ public class ProjectsPage extends VBox{
 
         Label projectLabel = new Label("Add a project");
         TextField projectName = new TextField("Project name here");
+        TextArea projectDescription = new TextArea("Project description");
         Button projectCreateButton = new Button("Create Project");
+        
 
         projectForm.getChildren().add(projectLabel);
         projectForm.getChildren().add(projectName);
+        projectForm.getChildren().add(projectDescription);
         projectForm.getChildren().add(projectCreateButton);
 
         projectCreateButton.setOnAction((event) -> {
             String name = projectName.getText();
+            String description = projectDescription.getText();
 
-            Project project = projectService.createProject(name);
+            Project project = projectService.createProject(name, description);
 
             if(project != null){
                 message.setText("Project created: " + project.getId());
@@ -65,28 +70,32 @@ public class ProjectsPage extends VBox{
         {
             HBox projectRow = new HBox(5);
             Label projectLabel = new Label(project.getName());
+            Label projectDescription = new Label(project.getDescription());
 
             Button editButton = new Button("Edit");
             Button deleteButton = new Button("Delete");
 
             editButton.setOnAction((event) -> {
-                TextField editField = new TextField(project.getName());
+                TextField editName = new TextField(project.getName());
+                TextArea editDescription = new TextArea(project.getDescription());
 
                 Button saveButton = new Button("Save");
                 Button cancelButton = new Button("Cancel");
 
                 projectRow.getChildren().clear();
 
-                projectRow.getChildren().add(editField);
+                projectRow.getChildren().add(editName);
+                projectRow.getChildren().add(editDescription);
                 projectRow.getChildren().add(saveButton);
                 projectRow.getChildren().add(cancelButton);
 
                 saveButton.setOnAction((saveEvent) -> {
-                    String newName = editField.getText();
+                    String newName = editName.getText();
+                    String newDescription = editDescription.getText();
 
-                    if(newName.isBlank()) return;
+                    if(newName.isBlank() || newDescription.isBlank()) return;
 
-                    projectService.renameProject(project.getId(), newName);
+                    projectService.updateProject(project.getId(), newName, newDescription);
 
                     loadProjects();
                 });
@@ -102,6 +111,7 @@ public class ProjectsPage extends VBox{
             });
 
             projectRow.getChildren().add(projectLabel);
+            projectRow.getChildren().add(projectDescription);
             projectRow.getChildren().add(editButton);
             projectRow.getChildren().add(deleteButton);
 

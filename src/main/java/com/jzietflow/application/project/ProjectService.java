@@ -14,9 +14,9 @@ public class ProjectService {
         this.projectRepository = projectRepository;
     }
 
-    public Project createProject(String projectName)
+    public Project createProject(String projectName, String projectDescription)
     {
-        Project project = new Project(projectName);
+        Project project = new Project(projectName, projectDescription);
 
         return projectRepository.save(project);
     }
@@ -30,7 +30,7 @@ public class ProjectService {
         projectRepository.delete(id);
     }
 
-    public void renameProject(UUID id, String name)
+    public void updateProject(UUID id, String name, String description)
     {
         Optional<Project> project = projectRepository.findById(id);
 
@@ -39,8 +39,11 @@ public class ProjectService {
             throw new IllegalArgumentException("Project not found: " + id.toString());
         }
 
-        project.get().rename(name);
+        Project existingProject = project.get();
 
-        projectRepository.update(project.get());
+        existingProject.rename(name);
+        existingProject.updateDescription(description);
+
+        projectRepository.update(existingProject);
     }
 }

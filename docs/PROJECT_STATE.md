@@ -107,6 +107,7 @@
     [X] TICKET 013 - show projects and refresh as a new project is added
     [X] TICKET 014 - created a Project delete feature
     [X] TICKET 015 - created a Project edit feature
+    [X] TICKET 016 - created a Project complete field - description
 
 
 ## Next Tickets
